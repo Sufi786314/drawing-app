@@ -1,6 +1,4 @@
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -55,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     
             if (response.ok) {
-                const result = await response.text(); // Adjust if you expect JSON
+                const result = await response.text(); 
                 console.log("Server response:", result);
             } else {
                 console.error("Server error:", response.status, response.statusText);
@@ -78,25 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 
-    document.getElementById('shareBtn').addEventListener('click', async () => {
-        const shareLink = document.getElementById('shareLink');
-        const image = canvas.toDataURL();
+//     document.getElementById('shareBtn').addEventListener('click', async () => {
+//         const shareLink = document.getElementById('shareLink');
+//         const image = canvas.toDataURL();
 
-        try {
-            const response = await fetch('/save-drawing', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ image })
-            });
+//         try {
+//             const response = await fetch('/save-drawing', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({ image })
+//             });
 
-            const data = await response.json();
-            const drawingId = data._id; // Assuming server returns an ID for the saved drawing
-            shareLink.value = `http://localhost:8080/view-drawing?id=${drawingId}`;
-        } catch (err) {
-            console.error('Error sharing drawing:', err);
-        }
-    });
+//             const data = await response.json();
+//             const drawingId = data._id; // Assuming server returns an ID for the saved drawing
+//             shareLink.value = `http://localhost:8080/view-drawing?id=${drawingId}`;
+//         } catch (err) {
+//             console.error('Error sharing drawing:', err);
+//         }
+//     });
 });
-

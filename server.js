@@ -52,7 +52,7 @@ app.post('/save-drawing', async (req, res) => {
 // // Route to get the last drawing
 app.get('/last-drawing', async (req, res) => {
     try {
-        console.log('chala ')
+        // console.log('chala ');
         const lastDrawing = await Drawing.findOne().sort({ created_at: -1 });
         if (lastDrawing) {
             res.status(200).json({ image: lastDrawing.image });
