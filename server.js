@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8080;
-
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/drawingApp', {
     useNewUrlParser: true,
@@ -49,6 +48,22 @@ app.post('/save-drawing', async (req, res) => {
     }
 });
 
+
+// // Route to get the last drawing
+app.get('/last-drawing', async (req, res) => {
+    try {
+        console.log('chala ')
+        const lastDrawing = await Drawing.findOne().sort({ created_at: -1 });
+        if (lastDrawing) {
+            res.status(200).json({ image: lastDrawing.image });
+        } else {
+            res.status(404).send('No drawings found');
+        }
+    } catch (err) {
+        console.error('Error fetching last drawing:', err);
+        res.status(500).send('Error fetching last drawing');
+    }
+});
 
 app.get("/",(req,res)=>{
     return res.render("index")

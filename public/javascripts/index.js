@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -27,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function endDrawing() {
         isDrawing = false;
     }
+
 
     document.getElementById('clearBtn').addEventListener('click', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,6 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Fetch error:', error);
         }
     });
+
+
+    document.getElementById('loadButton').addEventListener('click', () => {
+        fetch('/last-drawing')
+            .then(response => response.json())
+            .then(data => {
+                const img = new Image();
+                img.onload = () => ctx.drawImage(img, 0, 0);
+                img.src = data.image;
+            })
+            .catch(err => console.error('Error:', err));
+    });
     
 
     document.getElementById('shareBtn').addEventListener('click', async () => {
@@ -83,3 +99,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
