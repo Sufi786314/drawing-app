@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('saveBtn').addEventListener('click', async () => {
-        const canvas = document.getElementById('myCanvas');
+        const canvas = document.getElementById('canvas');
         if (!canvas) {
             console.error('Canvas element not found');
             return;
